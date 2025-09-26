@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class SettingsUi : MonoBehaviour
 {
-    [SerializeField] SceneLoader scene;
+    private SceneLoader scene;
+    private AudioManager audioManager;
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
+        scene = SceneLoader.Instanse;
+    }
 
     public void btBack()
     {
         scene.MainMenu();
+        audioManager.PlaySFX(SFXType.ButtonClick);
     }
 }

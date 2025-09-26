@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private Animator anim;
 
+    private AudioManager audioManager;
+    private bool wasGrounded;
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
+    }
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -33,6 +39,19 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
             Jump();
 
+        bool isCurrentlyGrounded = isGrounded();
+
+        if (isCurrentlyGrounded && !wasGrounded)
+        {
+            // Відтворюємо звук приземлення, якщо гравець щойно приземлився
+            audioManager.PlaySFX(SFXType.Land); // Або інший звук приземлення, якщо у вас є
+        }
+
+        // Оновлюємо прапорець для наступного кадру
+        wasGrounded = isCurrentlyGrounded;
+
+
+
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", isGrounded());
 
@@ -45,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
+            audioManager.PlaySFX(SFXType.Jump);
         }
     }
 
@@ -52,5 +72,10 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f,groundLayer);
         return raycastHit.collider != null;
+    }
+
+    public void PlayWalkSound()
+    {
+        audioManager.PlaySFX(SFXType.Walk);
     }
 }

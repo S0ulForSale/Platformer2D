@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     public bool dead { get; private set; }
 
+    private AudioManager audioManager;
+
     private void Awake()
     {
        // player.GetComponent<PlayerMovement>().enabled = true;
@@ -20,7 +22,10 @@ public class Health : MonoBehaviour
         rigidbody2 = GetComponent<Rigidbody2D>();
         dead = false;
     }
-
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
+    }
     public void TakeDamage(float _damage)
     {
         if (currentHealth <= 0)
@@ -31,6 +36,7 @@ public class Health : MonoBehaviour
         {
             //take damage
             anim.SetTrigger("hurt");
+            audioManager.PlaySFX(SFXType.Damage);
         }
         else
         {

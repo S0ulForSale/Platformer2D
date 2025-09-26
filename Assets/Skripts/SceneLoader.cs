@@ -5,6 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader Instanse = null;
+
+    public void Awake()
+    {
+        if(Instanse != null) 
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instanse = this;
+        DontDestroyOnLoad(gameObject);
+    }
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
