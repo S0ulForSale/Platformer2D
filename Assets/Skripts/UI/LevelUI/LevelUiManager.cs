@@ -17,8 +17,12 @@ public class LevelUiManager : MonoBehaviour
 
     [SerializeField] GameObject PauseUI;
 
-    private void Awake()
+    private AudioManager audioManager;
+    private bool isGameOver = false;
+    private bool isWinGame = false;
+    private void Start()
     {
+        audioManager = AudioManager.Instance;
         DeadUI.SetActive(false);
         WinUI.SetActive(false);
         PauseUI.SetActive(false);
@@ -27,11 +31,11 @@ public class LevelUiManager : MonoBehaviour
 
     private void Update()
     {
-        if(playerHealth.dead) 
+        if(playerHealth.dead && !isGameOver) 
         {
             GameOver();
         }
-        if(finish.win)
+        if(finish.win && !isWinGame)
         {
             WinGame();
         }
@@ -49,15 +53,17 @@ public class LevelUiManager : MonoBehaviour
     }
     private void GameOver()
     {
-        Console.WriteLine("Dead");
+        isGameOver = true;
         DeadUI.SetActive(true);
         PlayerUI.SetActive(false);
+        audioManager.PlaySFX(SFXType.Lose);
     }
     private void WinGame()
     {
-        Console.WriteLine("Win");
+        isWinGame = true;
         WinUI.SetActive(true);
         PlayerUI.SetActive(false);
+        audioManager.PlaySFX(SFXType.Win);
     }
 
 }
