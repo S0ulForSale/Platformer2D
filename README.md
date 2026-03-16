@@ -1,4 +1,4 @@
-🕹️ 2D Pixel-Art Platformer
+#🕹️ 2D Pixel-Art Platformer
 
 A classic side-scrolling platformer built with Unity 2D. This project focuses on clean character controller logic, level state management, and audio integration.
 
