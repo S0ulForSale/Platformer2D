@@ -1,8 +1,8 @@
-#🕹️ 2D Pixel-Art Platformer
+# 🕹️ 2D Pixel-Art Platformer
 
 A classic side-scrolling platformer built with Unity 2D. This project focuses on clean character controller logic, level state management, and audio integration.
 
-🚀 Key Features
+## 🚀 Key Features
 
 - Smooth Character Controller: Responsive movement (Left/Right) and a tuned Jump mechanic.
 
@@ -12,7 +12,7 @@ A classic side-scrolling platformer built with Unity 2D. This project focuses on
 
 - Pixel-Art Aesthetics: Clean retro-style visuals with optimized sprite rendering.
 
-🎮 Gameplay - with GIF and images
+## 🎮 Gameplay - with GIF and images
 
 - Main Menu
   
